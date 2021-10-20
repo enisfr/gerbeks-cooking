@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const recipeRoutes = require('./routes/recipe-route');
-const coreRoutes = require('./routes/core-route')
+const coreRoutes = require('./routes/core-route');
 
 const rootPath = path.dirname(require.main.filename);
 const app = express();
