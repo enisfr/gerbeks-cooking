@@ -1,18 +1,4 @@
-const fs = require('fs');
-const path = require('path');
-const recipesStoragePath = path.join(path.dirname(require.main.filename), 'data', 'recipes.json');
-
-
-const readDataFromFile = (callback) => {
-	fs.readFile(recipesStoragePath, (err, recipes) => {
-		if(err) {
-			console.log(err);
-			callback([]);
-		} else {
-			callback(JSON.parse(recipes.toString()))
-		}
-	});
-}
+const db = require('../util/db');
 
 class Recipe {
 	constructor(title, details, id) {
@@ -21,48 +7,25 @@ class Recipe {
 		this.id = id;
 	}
 
-	save(edit, recipe) {
-		let result;
-		readDataFromFile(recipes => {
-			if(edit) {
-				result = recipes.filter(rcp => rcp.id !== recipe.id);
-				result.push(recipe);
+	static create(recipe) {
+		return db.execute('INSERT INTO `recipes` (`title`, `details`) VALUES (?, ?)', [recipe.title, recipe.details]);
+	}
 
-			} else {
-				recipe.id = Math.floor(Math.random()*10000000).toString();
-				recipes.push(recipe);
-				result = recipes;
-			}
-			fs.writeFile(recipesStoragePath, JSON.stringify(result), (err) => {
-				if(err) {
-					console.log(err);
-				}
-			});
-		});
+	static update(recipe) {
+		return db.execute('UPDATE `recipes` SET `title` = (?), `details` = (?) WHERE `id` = (?)', [recipe.title, recipe.details, recipe.id]);
 	}
 
 	static delete(id) {
-		readDataFromFile(recipes => {
-			recipes = recipes.filter(rcp => rcp.id !== id);
-			fs.writeFile(recipesStoragePath, JSON.stringify(recipes), (err) => {
-				if(err) {
-					console.log(err);
-				}
-			});
-		});
+		return db.execute('DELETE FROM `recipes` WHERE `id` = (?)', [id]);
 	}
 
-	static readFile(callback) {
-		readDataFromFile(callback);
+	static getAll() {
+		return db.execute('SELECT * FROM `recipes`');
 	}
 
-	static findRecipe(id, callback) {
-		readDataFromFile(recipes => {
-			callback(recipes.find(recipe => recipe.id === id));
-		});
-
+	static findById(id) {
+		return db.execute('SELECT * FROM `recipes` WHERE `id` = (?)', [id]);
 	}
-
 }
 
 module.exports = Recipe;

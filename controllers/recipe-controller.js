@@ -1,8 +1,9 @@
 const Recipe = require('../models/recipe-model');
 
-
 exports.renderRecipesPage = (req, res) => {
-	Recipe.readFile((recipes) => {
+	Recipe.getAll()
+	.then(result => {
+		const recipes = result[0];
 		res.render('list', {page: 'list', recipes});
 	});
 }
@@ -13,25 +14,28 @@ exports.renderCreateRecipePage = (req, res) => {
 
 exports.createRecipe = (req, res) => {
 	const recipe = new Recipe(req.body.title, req.body.details, null);
-	recipe.save(false, recipe, null);
-	res.redirect('/recipe/list');
+	Recipe.create(recipe)
+	.then(() => res.redirect('/recipe/list'))
+	.catch(console.log);
 }
 
 exports.renderEditRecipePage = (req, res) => {
-	const recipeId = req.params.id;
-
-	Recipe.findRecipe(recipeId, recipe => {
+	Recipe.findById(req.params.id)
+	.then((result) => {
+		const recipe = result[0][0];
 		res.render('edit-recipe', {recipe});
 	});
 }
 
 exports.editRecipe = (req, res) => {
 	const recipe = new Recipe(req.body.title, req.body.details, req.body.id);
-	recipe.save(true, recipe);
-	res.redirect('/recipe/list');
+	Recipe.update(recipe)
+	.then(() => res.redirect('/recipe/list'))
+	.catch(console.log);
 }
 
 exports.deleteRecipe = (req, res) => {
-	Recipe.delete(req.body.id);
-	res.redirect('/recipe/list');
+	Recipe.delete(req.body.id)
+	.then(() => res.redirect('/recipe/list'))
+	.catch(console.log);
 }
