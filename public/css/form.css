@@ -1,0 +1,26 @@
+.recipe-form {
+	font-size: 1.4rem;
+	width: 90vw;
+	margin: 2rem auto;
+	align-items: center;
+}
+
+.recipe-form-control {
+	display: flex;
+	margin-bottom: 0.5rem;
+}
+
+.recipe-form-control label {
+	display: block;
+	width: 20%;
+}
+
+.recipe-form-control input,
+.recipe-form-control textarea {
+	display: block;
+	width: 100%;
+	resize: none;
+}
+
+
+

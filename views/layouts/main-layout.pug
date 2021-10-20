@@ -1,0 +1,17 @@
+doctype html
+head
+    meta(charset='UTF-8')
+    meta(name='viewport' content='width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0')
+    meta(http-equiv='X-UA-Compatible' content='ie=edge')
+    link(rel='stylesheet' href='/main.css')
+    block styles
+    title Gerbek's Cooking
+header.main-header
+    h1.main-header__h1 Gerbek's Cooking
+    nav.main-header__nav
+        ul.main-header__list
+            li.main-header__item
+                a(href='/recipe/list', class=(page === 'list' ? 'active' : '')) List
+            li.main-header__item
+                a(href='/recipe/create', class=(page === 'create' ? 'active' : '')) Create
+block content

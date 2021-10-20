@@ -1,0 +1,25 @@
+extends layouts/main-layout.pug
+
+block styles
+    link(rel='stylesheet' href='/card.css')
+
+block content
+    main
+    .cards-wrapper
+        if recipes.length > 0
+            each recipe in recipes
+                .card-wrapper
+                    .card
+                        .container
+                            div
+                                h4
+                                    b #{recipe.title}
+                                p #{recipe.details}
+                        hr
+                        .btn-wrapper
+                            a(href='/recipe/edit/' + recipe.id, class='btn primary no-border') Edit
+                            form(action='/recipe/delete' method='POST')
+                                input.hidden(type='text' name='id' value=`${recipe.id}`)
+                                button.btn.danger.no-border(type='submit') Delete
+        else
+            h2.main-header__h2 No Recipe Found

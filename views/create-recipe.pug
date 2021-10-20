@@ -1,0 +1,16 @@
+extends layouts/main-layout.pug
+
+block styles
+    link(rel='stylesheet' href='/form.css')
+
+block content
+    main
+        form.recipe-form(action='/recipe/create' method='POST')
+            .recipe-form-control
+                label(for='title') Title:
+                input#title(type='text' name='title')
+            .recipe-form-control
+                label(for='details') Recipe Details:
+                textarea#details(rows='4' cols='10' name='details')
+            .btn-wrapper
+                button.btn.primary(type='submit') Add Recipe

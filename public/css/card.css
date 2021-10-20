@@ -1,0 +1,38 @@
+.cards-wrapper {
+	display: flex;
+	justify-content: space-evenly;
+	flex-flow: wrap;
+}
+
+.card-wrapper {
+	width: 40vw;
+	margin: 1rem ;
+	border: 1px solid #b9b8b8;
+	border-radius: 0.5rem;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.card {
+	box-shadow: 0 4px 8px 0 #00000033;
+	transition: 0.3s;
+}
+
+.card:hover {
+	box-shadow: 0 8px 16px 0 #00000033;
+}
+
+.container {
+	padding: 2px 16px;
+	align-items: center;
+	display: flex;
+	justify-content: space-between;
+}
+
+p {
+}
+
+.card p {
+	display: flex;
+}
