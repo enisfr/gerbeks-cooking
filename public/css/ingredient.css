@@ -1,0 +1,46 @@
+.ingredient-form {
+	font-size: 1.4rem;
+	width: 90vw;
+	margin: 2rem auto;
+	align-items: center;
+}
+
+.ingredient-form-control-wrapper {
+	display: flex;
+}
+
+.ingredient-form-control {
+	display: block;
+	width: auto;
+	margin-bottom: 0.5rem;
+	margin-right: 2rem;
+	align-self: end;
+}
+
+.ingredient-form-control label {
+	margin-bottom: 1rem;
+	display: block;
+	width: auto;
+}
+
+.ingredient-form-control input {
+	display: block;
+	width: 20vw;
+	resize: none;
+}
+
+.ingredient-form-control select {
+	font-size: initial;
+	display: block;
+	width: 10vw;
+}
+
+.btn {
+	margin: 0;
+}
+
+.disabled {
+	pointer-events: none;
+}
+
+

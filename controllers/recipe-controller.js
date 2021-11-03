@@ -1,5 +1,9 @@
 const Recipe = require('../models/recipe-model');
 
+let ingredients = [{name: 'DOMATES', value: '2', measurementUnit: 'Tablespoon'}, {name: 'BİBER', value: '1', measurementUnit: 'Teaspoon'}, {name: 'PATLICAN', value: '23', measurementUnit: 'Cup'}];
+
+let measurementUnits = ['Teaspoon', 'Tablespoon', 'Cup', 'ml'];
+
 exports.renderRecipesPage = (req, res) => {
 	Recipe.getAll()
 	.then(result => {
@@ -38,4 +42,31 @@ exports.deleteRecipe = (req, res) => {
 	Recipe.delete(req.body.id)
 	.then(() => res.redirect('/recipe/list'))
 	.catch(console.log);
+}
+
+exports.addIngredient = (req, res) => {
+	ingredients.push(req.body);
+	res.status(200).render('ingredient', {ingredients, measurementUnits});
+}
+
+exports.renderAddIngredientPage = (req, res) => {
+	res.render('ingredient', {ingredients, measurementUnits})
+}
+
+exports.saveIngredients = (req, res) => {
+	let result = [];
+
+	for(let i = 0; i < req.body.name.length; i++) {
+		let ingredient = {
+			name: req.body.name[i],
+			value: req.body.value[i],
+			measurementUnit: req.body.measurementUnit[i]
+		}
+
+		result.push(ingredient);
+	}
+
+	ingredients = result;
+
+	res.render('ingredient', {ingredients, measurementUnits})
 }

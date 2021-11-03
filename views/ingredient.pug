@@ -1,0 +1,47 @@
+extends layouts/main-layout.pug
+
+block styles
+    link(rel='stylesheet' href='/main.css')
+    link(rel='stylesheet' href='/ingredient.css')
+
+block content
+    main
+        form.ingredient-form(action='/recipe/add-ingredients' method='POST')
+            each ingredient in ingredients
+                .ingredient-form-control-wrapper
+                    .ingredient-form-control
+                        if ingredients.length > 0 && ingredients[0] === ingredient
+                            label(for='ingredient-name') Name:
+                        input#name(type='text' name='name' value=`${ingredient.name}`)
+                    .ingredient-form-control
+                        if ingredients.length > 0 && ingredients[0] === ingredient
+                            label(for='ingredient-value') Value:
+                        input#value(type='number' name='value' value=`${ingredient.value}`)
+                    .ingredient-form-control
+                        if ingredients.length > 0 && ingredients[0] === ingredient
+                            label(for='ingredient-mu') MU:
+                        input.disabled#mu(type='text' name='mu' value=`${ingredient.measurementUnit}` )
+                    .ingredient-form-control
+                        if ingredients.length > 0 && ingredients[0] === ingredient
+                            label Measure Unit:
+                        select(name="measurementUnit")
+                            each measurementUnit in measurementUnits
+                                option=(value=`${measurementUnit}`)
+            button.btn.primary(type='submit') Save
+
+        form.ingredient-form(action='/recipe/add-ingredient' method='POST')
+            .ingredient-form-control-wrapper
+                .ingredient-form-control
+                    label(for='ingredient-name') Name:
+                    input#ingredient-name(type='text' name='name')
+                .ingredient-form-control
+                    label(for='ingredient-value') Value:
+                    input#ingredient-value(type='number' name='value')
+                .ingredient-form-control
+                    label Measure Unit:
+                    select(name="measurementUnit")
+                        each measurementUnit in measurementUnits
+                            option= measurementUnit
+                .ingredient-form-control
+                    button.btn.primary(type='submit') Add
+

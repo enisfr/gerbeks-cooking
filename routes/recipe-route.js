@@ -15,4 +15,10 @@ router.get('/edit/:id', recipeControllers.renderEditRecipePage);
 
 router.post('/delete', recipeControllers.deleteRecipe);
 
+router.get('/add-ingredient', recipeControllers.renderAddIngredientPage)
+
+router.post('/add-ingredient', recipeControllers.addIngredient)
+
+router.post('/add-ingredients', recipeControllers.saveIngredients)
+
 module.exports = router;

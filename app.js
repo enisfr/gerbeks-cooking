@@ -12,6 +12,7 @@ app.set('views', 'views');
 
 app.use(express.static(path.join(rootPath, 'public', 'css')));
 app.use(bodyParser.urlencoded({extended: false}));
+
 app.use('/recipe', recipeRoutes);
 app.use(coreRoutes);
 
